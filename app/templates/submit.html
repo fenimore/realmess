@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+
+{% block content %}
+  {% if session.logged_in %}
+    <form action="{{ url_for('submit') }}" method=post>
+        <label>Text:</label> 
+        <textarea class=form-control name=body rows=5 cols=40></textarea>
+        <label>Associated Contract</label> 
+        <select name="contract" class="form-control">
+          {% for contract in contracts %}
+          <option value="{{ contract.id }}" >{{ contract.body }}</option>
+          {% else %}
+          Unbelievable.  No contracts here so far
+          {% endfor %}
+        </select>
+        <label style=display:none>Author</label>
+        <input style=display:none type=text value='{{session.username}}' name=author class=form-control>
+        <label>Submit</label> <br>
+        <input type=submit value=Submit class="btn btn-info">
+    </form>
+  {% endif %}
+{% endblock %}
+
+        <input style=display:none type=text value='{{session.username}}' name=author class=form-control>

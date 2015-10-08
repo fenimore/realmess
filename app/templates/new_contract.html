@@ -1,0 +1,31 @@
+{% extends "layout.html" %}
+{% block content %}
+  {% if session.logged_in %}
+    <form action="{{ url_for('add_contract') }}" method=post>
+        Text:
+        <textarea class='form-control' name=body rows=5 cols=40 required></textarea>
+        Signee:
+                <label>First Signee:</label> <input class='form-control' type="text" name="user_1" required>
+        
+                <label>Second Signee:</label> <input class='form-control' type="text" name="user_2" required>
+        <select name="what" class="form-control">
+          {% for user in users %}
+          <option value="{{ user.username }}" >{{ user.username }}</option>
+          {% else %}
+          Unbelievable.  No users here so far
+          {% endfor %}
+        </select>
+        Signee:
+        <select name="who" class="form-control">
+          {% for user in users %}
+          <option value="{{ user.username }}" >{{ user.username }}</option>
+          {% else %}
+          Unbelievable.  No users here so far
+          {% endfor %}
+        </select>
+        <input class='form-control' name=end_date size=10>
+        <input type=submit value=submit>
+      
+    </form>
+  {% endif %}
+{% endblock %}

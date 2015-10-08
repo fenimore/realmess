@@ -1,0 +1,10 @@
+{% extends "layout.html" %}
+{% block content %}
+  <ul class=submissions>
+  {% for submission in submissions %}
+    <li><h2>{{ submission.body }}</h2>{{ submission.author }}
+  {% else %}
+    <li><em>Unbelievable.  No entries here so far</em>
+  {% endfor %}
+  </ul>
+{% endblock %}

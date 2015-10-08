@@ -1,0 +1,10 @@
+{% extends "layout.html" %}
+{% block content %}
+  <ul>
+  {% for contract in contracts %}
+    <li><h3><a href=/contracts/{{ contract.id }}>{{ contract.body }}</a></h3>End: {{ contract.end_date }}</li>
+  {% else %}
+    <li><em>Unbelievable.  No contracts here so far</em></li>
+  {% endfor %}
+  </ul>
+{% endblock %}

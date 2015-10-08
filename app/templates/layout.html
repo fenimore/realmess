@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {% block head %}
+    <title>Reality {% block title %}{% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Real Mess">
+    <meta name="keywords" content="">
+    <meta name="author" content="Fenimore Love">
+    <meta charset="utf-8">
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="shortcut icon" sizes="16x16 24x24 32x32 48x48 64x64" href="{{ url_for('static', filename='ico/favicon.ico') }}">
+    {% endblock %}
+    
+  </head>
+  <body>
+  {% block navbar %}
+  <nav class="navbar">
+    <div class="navbar navbar-default">
+      <div class="container">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+      <a class="navbar-brand" href="/">Real Mess</a>
+        <div div id="navbar" class="navbar-collapse collapse">
+         <ul class="nav navbar-nav">   
+          <li><a href="{{ url_for('oblige') }}">Write Contract</a></li> 
+          <li><a href="{{ url_for('submit') }}">Submit</a></li>
+          <li><a href="{{ url_for('show_contracts') }}">My Contracts</a></li>           
+          <li><a href="{{ url_for('show_submissions') }}">My Submissions</a></li> 
+          <li><a href="{{ url_for('show_users') }}">Users</a></li>                 
+          {% if not session.logged_in %}
+          <li><a href="{{ url_for('login') }}">Log in</a></li>
+          <li><a href="{{ url_for('signup') }}">Sign Up</a></li>
+          {% else %}
+          <li><a href="{{ url_for('my_profile') }}">{{session.username}}</a></li>       
+          <li><a href="{{ url_for('logout') }}">Log out</a></li>
+          {% endif %}
+         </ul>   
+          {% block navbar_right %}
+          {% endblock %}
+        </div><!--/.nav-collapse -->
+      </div>
+    </div>
+  </nav>
+    {% endblock %}
+    
+    <div class="container page" style="margin-top:2px">
+        <div class="content">
+          <div class="row">
+            <div class='col-sm-6'>
+            {% block content %}
+          
+            {% endblock %}
+            </div>
+            <div class='col-sm-4'>
+               {% if not session.logged_in %}
+                <a class="btn btn-default" href="{{ url_for('login') }}">Log in</a>
+                <a class="btn btn-default" href="{{ url_for('signup') }}">Sign Up</a>
+                {% else %} 
+                <h4><a href="{{ url_for('my_profile') }}">{{session.username}}</a></h4>
+                <a class="btn btn-default" href="{{ url_for('oblige') }}">Write Contract</a>
+                <a class="btn btn-default" href="{{ url_for('submit') }}">Submit</a><br>
+                <a class="btn btn-default" href="{{ url_for('show_contracts') }}">My Contracts</a>           
+                <a class="btn btn-default" href="{{ url_for('show_submissions') }}">My Submissions</a> <hr>
+                <a class="btn btn-default" href="{{ url_for('show_users') }}">Users</a>             
+                
+                <a class="btn btn-default" href="{{ url_for('logout') }}">Log out</a>
+              {% endif %}
+             
+            {% block control %}
+            {% endblock %}
+            </div>
+          </div>
+
+        </div>
+        
+        
+        
+        <hr>
+        
+        
+        {% block footer %}
+        <footer class="footer">
+            <p>Real Mess | 2015</p>
+              {% for message in get_flashed_messages() %}
+                <div class=flash>{{ message }}</div>
+              {% endfor %}
+        </footer>
+        {% endblock %}
+    </div>
+    {% block js_footer %}
+      <script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+      <!-- Latest compiled and minified JavaScript -->
+      <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    {% endblock %}
+  </body>
+</html>

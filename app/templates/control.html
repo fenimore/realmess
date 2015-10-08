@@ -1,0 +1,20 @@
+{% block content %}
+  {% if session.logged_in %}
+  
+           <ul>  
+           {% if not session.logged_in %}
+          <li><a href="{{ url_for('login') }}">Log in</a></li>
+          <li><a href="{{ url_for('signup') }}">Sign Up</a></li>
+          {% else %} 
+          <h4><a href="{{ url_for('my_profile') }}">{{session.username}}</a></h4>
+          <li><a href="{{ url_for('oblige') }}">Write Contract</a></li> 
+          <li><a href="{{ url_for('submit') }}">Submit</a></li>
+          <li><a href="{{ url_for('show_contracts') }}">My Contracts</a></li>           
+          <li><a href="{{ url_for('show_entries') }}">My Submissions</a></li> <hr>
+          <li><a href="{{ url_for('show_users') }}">Users</a></li>                 
+          
+          <li><a href="{{ url_for('logout') }}">Log out</a></li>
+          {% endif %}
+         </ul>  
+  {% endif %}
+{% endblock %}

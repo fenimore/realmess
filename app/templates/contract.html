@@ -1,0 +1,7 @@
+{% extends "layout.html" %}
+{% block content %}
+    {{ contract.body }} <br>
+    {{ contract.id }}
+    <br>
+    <a class="btn btn-danger" href="remove/{{ contract.id}}" >Remove</a>
+{% endblock %}
